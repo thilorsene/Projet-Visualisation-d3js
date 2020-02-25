@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="d3.js"></script>
+    </head>
+    <style>
+         svg{
+     background:repeating-linear-gradient(to top, white, skyblue);
+     border-style: solid;
+     border-width:"3px" ;} 
+     #s{
+     background:repeating-linear-gradient(to left, red, yellow);
+     border-width:"3px" ;} 
+
+     #p{
+     background:repeating-linear-gradient(to left, red, rgb(224, 224, 223));
+     border-width:"3px" ;} 
+
+     </style>
+        <body>
+            <svg  width= "600", height = "600">
+                /*dessin de la case 1*/
+                <rect id="c1" height="50" width="60" y="550" x="10" stroke-width="5" stroke="#000000" fill="#582900"/>
+                <rect id="c11" height="20" width="20" y="580" x="30" stroke-width="2" stroke="#000000" fill="#000000"/>
+                /*dessin de la case 2*/
+                <rect id="c2" height="50" width="60" y="550" x="100" stroke-width="5" stroke="#000000" fill="#582900"/>
+                <rect id="c21" height="20" width="20" y="580" x="120" stroke-width="2" stroke="#000000" fill="#000000"/>
+                /*dessin de la case 3*/
+                <rect id="c3" height="50" width="60" y="550" x="190" stroke-width="5" stroke="#000000" fill="#582900"/>
+                <rect id="c31" height="20" width="20" y="580" x="210" stroke-width="2" stroke="#000000" fill="#000000"/>
+
+                /*installation du toit des case 1 */
+                <polygon id="t1" stroke="#000000" fill="black" points="40 510 10 550 70 550"/>
+                <polygon id="t11" stroke="#000000" fill="black" points="30 500 40 510 50 500"/>
+                /*installation du toit des case 2 */
+                <polygon id="svg_5" stroke="#000000" fill="black" points="130 510 100 550 160 550"/>
+                <polygon id="svg_51" stroke="#000000" fill="black" points="120 500 130 510 140 500"/>
+                /*installation du toit des case 3 */
+                <polygon id="svg_5" stroke="#000000" fill="black" points="220 510 190 550 250 550"/>
+                <polygon id="svg_51" stroke="#000000" fill="black" points="210 500 220 510 230 500"/>
+                /*lever du soleil*/
+                <circle id="s" cx="500" cy="240" r="28"/>
+                /*faire pousser l'arbre*/
+                /*les feuilles*/
+                <ellipse cx="370" cy="510" rx="60" ry="35" fill="green"/>
+                <circle cx="370" cy="480" r="15" fill="green"/>
+                <circle cx="365" cy="484" r="15" fill="green"/>
+                <circle cx="360" cy="487" r="15" fill="green"/>
+                <circle cx="350" cy="485" r="18" fill="green"/>
+                <circle cx="330" cy="498" r="25" fill="green"/>
+                <circle cx="360" cy="511" r="25" fill="green"/>
+                <circle cx="335" cy="514" r="10" fill="green"/>
+                <circle cx="330" cy="515" r="27" fill="green"/>
+                <circle cx="430" cy="515" r="10" fill="green"/>
+                <circle cx="400" cy="540" r="14" fill="green"/>
+                <circle cx="420" cy="530" r="14" fill="green"/>
+                <circle cx="320" cy="515" r="17" fill="green"/>
+                <circle cx="430" cy="510" r="15" fill="green"/>
+                <circle cx="400" cy="540" r="14" fill="green"/>
+                <circle cx="430" cy="510" r="15" fill="green"/>
+                <circle cx="390" cy="490" r="19" fill="green"/>
+                <circle cx="410" cy="500" r="18" fill="green"/>
+                /*le tronc de l'arbre*/
+                <polyline id="svg_41" stroke-width="7" stroke="#000000" fill="black" points="360 545 363 545 357 545 360 565 360 600"/>
+                /*dessin du puit */
+                <rect id="p" height="45" width="55" y="555" x="490" stroke-width="1" stroke="#000000"/>
+                <ellipse cx="518" cy="550" rx="5" ry="28"  stroke="#000000" fill="none"/>
+                <circle cx="518" cy="522" r="5" />
+                /*LIGNE HORIZONTALE*/
+                <polyline id="svg_411" stroke-width="3" stroke="#000000" fill="" points="455 516 518 517 585 515"/>
+                 /*LIGNES VERTICALES*/
+                <polyline id="svg_411" stroke-width="3" stroke="#000000" fill="#000000" points="465 516 465 600"/>
+                <polyline id="svg_411" stroke-width="3" stroke="#000000" fill="none" points="460 510 465 516 470 505 "/>
+                <polyline id="svg_411" stroke-width="3" stroke="#000000" fill="#000000" points="575 515 575 600 "/>
+                <polyline id="svg_411" stroke-width="3" stroke="#000000" fill="none" points="570 510 575 516 580 505"/>
+                /*survol des oiseaux*/
+                <circle cx="560" cy="213" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 530 200 560 210 590 190"/>
+                <circle cx="425" cy="283" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 395 270 425 280 455 260"/>
+                <circle cx="370" cy="280" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 340 267 370 277 400 257"/>
+                <circle cx="310" cy="267" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 280 257 310 263 340 257"/>
+                <circle cx="370" cy="250" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 340 237 370 247 400 227"/>
+                <circle cx="445" cy="283" r="5"/>
+                <polyline stroke-width="8" stroke="#000000" fill="none" points=" 415 270 445 280 475 260"/>
+
+            </svg>
+        </body>
+</html>
