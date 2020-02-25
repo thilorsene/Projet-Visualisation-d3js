@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+<style>
+
+
+
+.axis {
+font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+fill: none;
+stroke: #000;
+shape-rendering: crispEdges;
+}
+
+</style>
+</head>
+
+<body>
+
+
+    <select id="deroul">
+        <option value="Idy"selected>Idy</option>
+        <option value="Madicke">Madické</option>
+        <option value="Macky">Macky</option>
+        <option value="Issa">Issa</option>
+        <option value="Sonko">Sonko</option>
+        
+    </select>
+    <button type="button" onclick="selecte()">Voir</button>
+<script src="d3.js"></script>
+<script>
+// set the dimensions of the canvas
+var margin = {top: 20, right: 100, bottom: 70, left: 140},
+width = 1000 ,
+height = 400 - margin.top - margin.bottom;
+
+
+
+
+// set the ranges
+var x = d3.scale.ordinal()
+.rangeRoundBands([0, width], 0.2);
+
+var y = d3.scale.linear()
+.range([height, 0]);
+
+// define the axis
+var xAxis = d3.svg.axis()
+.scale(x)
+.orient("bottom")
+
+var yAxis = d3.svg.axis()
+.scale(y)
+.orient("left")
+.ticks(10);
+
+
+// add the SVG element
+var svg = d3.select("body").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+
+    
+// load the data
+document.getElementById("myBtn1").onclick = function() {test('Idy')}
+document.getElementById("myBtn2").onclick = function() {test('Madicke')}
+document.getElementById("myBtn3").onclick = function() {test('Macky')}
+document.getElementById("myBtn4").onclick = function() {test('Issa')}
+document.getElementById("myBtn5").onclick = function() {test('Sonko')}
+
+
+function selecte(){
+    var clik = document.getElementById("deroul")
+    var result=clik.options[clik.selectedIndex].value;
+    
+    test(result)
+}
+function test(candidat){
+svg.selectAll('*').remove()
+d3.csv("elec.csv", function(error, data) {
+
+
+data.forEach(function(d) {
+d.region = d.Regions;
+d.idy = +d[candidat];
+});
+
+console.log(data)
+
+
+
+// scale the range of the data
+x.domain(data.map(function(d) { return d.region; }));
+y.domain([0, d3.max(data, function(d) { return d.idy; })]);
+
+// add axis
+svg.append("g")
+.attr("class", "x axis")
+.attr("transform", "translate(0," + height + ")")
+.call(xAxis);
+
+svg.append("g")
+.attr("class", "y axis")
+.call(yAxis);
+
+
+
+
+
+svg.append("rect").attr("x",1000).attr("y",5).attr("height", 10).attr("width", 10).style("fill", "#green")
+	svg.append("rect").attr("x",1000).attr("y",25).attr("height", 10).attr("width", 10).style("fill", "#3FAFE3")
+	svg.append("rect").attr("x",1000).attr("y",45).attr("height", 10).attr("width", 10).style("fill", "#E9F131")
+	svg.append("rect").attr("x",1000).attr("y",65).attr("height", 10).attr("width", 10).style("fill", "#F0562D")
+	svg.append("rect").attr("x",1000).attr("y",85).attr("height", 10).attr("width", 10).style("fill", "#1FD7EC")
+    svg.append("rect").attr("x",1000).attr("y",105).attr("height", 10).attr("width", 10).style("fill", "#EC1FD9")
+	svg.append("rect").attr("x",1000).attr("y",125).attr("height", 10).attr("width", 10).style("fill", "#0A4081")
+	svg.append("rect").attr("x",1000).attr("y",145).attr("height", 10).attr("width", 10).style("fill", "#0A4081")
+	svg.append("rect").attr("x",1000).attr("y",165).attr("height", 10).attr("width", 10).style("fill", "#9490A1")
+    svg.append("rect").attr("x",1000).attr("y",185).attr("height", 10).attr("width", 10).style("fill", "#9490A1")
+	svg.append("rect").attr("x",1000).attr("y",205).attr("height", 10).attr("width", 10).style("fill", "#19503D")
+	svg.append("rect").attr("x",1000).attr("y",225).attr("height", 10).attr("width", 10).style("fill", "#50191E")
+	svg.append("rect").attr("x",1000).attr("y",245).attr("height", 10).attr("width", 10).style("fill", "#074E6F")
+    svg.append("rect").attr("x",1000).attr("y",265).attr("height", 10).attr("width", 10).style("fill", "#9BF0CD")
+	
+    
+
+
+	svg.append("text").attr("x", 1024).attr("y", 12).text("Dakar").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 32).text("Diourbel").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 52).text("Fatick").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 72).text("Kaolack").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 92).text("Ziginchor").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 112).text("Tamba").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 132).text("Kaffrine").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 152).text("Kedougou").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 172).text("Louga").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 192).text("Matam").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 212).text("Saint-louis").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 232).text("Sedhiou").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 252).text("Thies").style("font-size", "10px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 1024).attr("y", 272).text("Kolda").style("font-size", "10px").attr("alignment-baseline","middle")
+	
+
+
+    svg.append("text").attr("x", 400).attr("y", 12).text("Nombre de Voix de : "+candidat).style("font-size", "20px").attr("alignment-baseline","middle")
+
+// Add bar chart
+svg.selectAll("bar")
+.data(data)
+.enter()
+.append("rect")
+.transition()
+.attr("x", function(d) { return x(d.region); })
+.attr("width", x.rangeBand())
+.attr("y", function(d) { return y(d.idy); })
+.attr("height", function(d) { return height - y(d.idy); })
+.attr("fill", function(d) {
+    if(d.region=="Dakar"){
+        return "green"
+    }
+    if(d.region=="Diourbel"){
+        return "#3FAFE3"
+    }
+    if(d.region=="Fatick"){
+        return "#E9F131"
+    }
+    if(d.region=="Kaolack"){
+        return "#F0562D"
+    }
+    if(d.region=="Ziguinchor"){
+        return "#1FD7EC"
+    }
+    if(d.region=="Tamba"){
+        return "#EC1FD9"
+    }
+    if(d.region=="Kaffrine"){
+        return "#0A4081"
+    }
+    if(d.region=="Kaolack"){
+        return "#3204CF"
+    }
+    if(d.region=="Kedougou"){
+        return "#9490A1"
+    }
+    if(d.region=="Louga"){
+        return "#19503D"
+    }
+    if(d.region=="Matam"){
+        return "#50191E"
+    }
+    if(d.region=="Saint-louis"){
+        return "#9BF0CD"
+    }
+    if(d.region=="Sedhiou"){
+        return "#B7520C"
+    }
+    if(d.region=="Thies"){
+        return "#074E6F"
+    }
+    if(d.region=="Kolda"){
+        return "#074E6F"
+    }
+    
+})
+
+});}
+
+</script>
+
+</body>
+

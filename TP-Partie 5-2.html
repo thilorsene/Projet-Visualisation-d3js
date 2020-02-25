@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CSV Data in a Table with D3</title>
+        <style>
+         
+            
+            
+          
+            
+            table {
+                margin-left:310px;
+                padding: 30px;
+                float:left;
+                padding:30px;
+                font-family:Arial, sans-serif;
+                border-collapse:collapse;
+}
+            
+            td {
+                
+                text-align:center;
+                font-size: 1em;
+                border: 2px solid rgba(8, 4, 4, 0.897);
+                padding: 3px 7px 2px 7px;
+                
+}
+            
+	       th {
+		      
+               font-size: 1em;
+               border: 2px solid rgb(9, 11, 12);
+               padding: 3px 7px 2px 7px;
+               
+             
+               
+	           }
+            
+        
+        
+        </style>
+	</head>
+    <body>
+       
+        <div id="table"></div>
+        
+    </body>
+    <script type="text/javascript" src="d3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+                 
+                 d3.csv("elec.csv", function(myData) {
+
+            var myArray = [];
+            
+            
+            myData.forEach(function(d,i){
+                d.region = d["Regions"];
+                d.idy = d["Idy"];
+                d.madicke = d["Madicke"];
+                d.macky=d["Macky"];
+                d.sonko=d["Sonko"];
+                d.issa=d["Issa"];
+                
+                
+                myArray.push([d.region, d.idy, d.madicke, d.macky,d.sonko,d.issa]);
+            })
+            
+            
+            console.log(myArray);
+           
+            
+            
+            var table = d3.select("#table").append("table");
+            var header = table.append("thead").append("tr");
+            
+            var headerObjs = [
+                { label: "Region"  },
+                { label: "IDY" },
+                { label: "Madické"},
+                { label: "Macky"},
+                { label: "Sonko"},
+                { label: "Issa",},
+                ];
+            
+            header
+                .selectAll("th")
+                .data(headerObjs)
+                .enter()
+                .append("th")
+                .text(function(d){ return d.label;});
+            
+            var tablebody = table.append("tbody");
+            
+            rows = tablebody   
+                .selectAll("tr")
+                .data(myArray)
+                .enter()
+                .append("tr");
+            
+            
+            
+            cell = rows.selectAll("td")
+                .data(function(d){
+                    return d;
+            })
+                .enter()
+                .append("td")
+                .style("background-color",function(myArray,i){
+                    for (i = 0; i < 6; i++) {
+                    if ( myArray> 53000){
+                        return "green";
+                    }
+                    if ( myArray> 26500 && myArray< 53000){
+                        return "orange";
+                    }
+                    if ( myArray< 26500){
+                        return "yellow";
+                    }}
+            })
+                .text(function(d){
+                    return d;
+            });
+            
+
+            
+        });
+     
+    
+    
+    </script>
+    
+</html>

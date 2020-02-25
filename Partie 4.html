@@ -1,0 +1,93 @@
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="d3/d3.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+<script>
+// set the dimensions and margins of the graph
+var margin = {top: 20, right: 100, bottom: 40, left: 90},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Parse the Data
+var data = 
+	[{"candidat":1, "nom":"Macky Sall", "part":58.26},
+	{"candidat":2, "nom":"Idrissa Seck", "part":20.51},
+	{"candidat":3, "nom":"Ousmane Sonko", "part":15.67},
+	{"candidat":4, "nom":"Issa Sall", "part":4.07},
+	{"candidat":5, "nom":"Madicke Niang", "part":1.48}];
+	
+  console.log(data)
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 70])
+    .range([ 0, width]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    
+    	
+	svg.append("rect").attr("x",300).attr("y",30).attr("height", 10).attr("width", 10).style("fill", "#5b1e1e")
+	svg.append("rect").attr("x",300).attr("y",70).attr("height", 10).attr("width", 10).style("fill", "#FFA500")
+	svg.append("rect").attr("x",300).attr("y",110).attr("height", 10).attr("width", 10).style("fill", "#008000")
+	svg.append("rect").attr("x",300).attr("y",150).attr("height", 10).attr("width", 10).style("fill", "#AED4AE")
+	svg.append("rect").attr("x",300).attr("y",190).attr("height", 10).attr("width", 10).style("fill", "#4C4CFF")
+	
+	svg.append("text").attr("x", 312).attr("y", 41).text("Macky Sall").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 312).attr("y", 81).text("Idrissa Seck").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 312).attr("y", 121).text("Ousmane Sonko").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 312).attr("y", 161).text("Issa Sall").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 312).attr("y", 201).text("Madicke Niang").style("font-size", "15px").attr("alignment-baseline","middle")
+	
+      
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([ height, 0 ])
+    .domain(data.map(function(d) { return d.nom; }))
+    .padding(0.2);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.nom); })
+    .attr("width", function(d) { return x(d.part); })
+    .attr("height", y.bandwidth() )
+    .attr("fill", function(d){switch(d.candidat){
+		case 1: return " #5b1e1e"
+			break;
+		case 2: return "#FFA500"
+			break;
+		case 3: return "#008000"
+			break;
+		case 4: return "#AED4AE"
+			break;
+		case 5:	return "#4C4CFF"
+			break;}});
+
+
+    // .attr("x", function(d) { return x(d.Country); })
+    // .attr("y", function(d) { return y(d.Value); })
+    // .attr("width", x.bandwidth())
+    // .attr("height", function(d) { return height - y(d.Value); })
+    // .attr("fill", "#69b3a2")
+
+    
+
+</script>
